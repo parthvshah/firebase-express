@@ -7,9 +7,8 @@ const firebaseApp = firebase.initializeApp(
 	functions.config().firebase
 );
 
-// Setting up routes
+// Express instance
 const app = express();
-require("./routes")(app);
 
 // Set up for urlencoded bodies
 var bodyParser = require('body-parser');
@@ -18,6 +17,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+// Setting up routes
+require("./routes")(app);
 
 // Run express as a firebase cloud function
 exports.app = functions.https.onRequest(app);
